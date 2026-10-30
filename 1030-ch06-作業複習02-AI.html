@@ -1,0 +1,2283 @@
+
+<!doctype html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SEIKO｜時序典藏・精品腕錶</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="CSS/bootstrap.min.css" />
+
+    <style>
+      /* =====================================================
+         01. 全站色彩設定：經典冷色系、銀灰、深藍
+      ===================================================== */
+      :root {
+        --color-deep: #121214;
+        --color-dark: #0d1117;
+        --color-blue: #27313d;
+        --color-silver: #c6d0d9;
+        --color-light: #edf1f5;
+        --color-white: #ffffff;
+        --color-text: #dce2e8;
+        --color-muted: #a0aab5;
+        --pointer-x: 50vw;
+        --pointer-y: 50vh;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        position: relative;
+        isolation: isolate;
+        min-height: 100vh;
+        margin: 0;
+        color: var(--color-text);
+        font-family:
+          "Noto Sans TC",
+          "Microsoft JhengHei",
+          Arial,
+          sans-serif;
+        background:
+          radial-gradient(ellipse at 50% -10%, #1d2732 0%, transparent 42%),
+          linear-gradient(145deg, #0d1117, #121214 55%, #090b0f);
+      }
+
+      body::before,
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+      }
+
+      body::before {
+        z-index: -2;
+        inset: -18%;
+        background:
+          radial-gradient(ellipse at 18% 42%, rgba(55, 91, 116, 0.2), transparent 34%),
+          radial-gradient(ellipse at 78% 28%, rgba(69, 87, 119, 0.16), transparent 32%),
+          radial-gradient(ellipse at 60% 82%, rgba(43, 82, 96, 0.13), transparent 35%);
+        background-size: 145% 145%;
+        filter: blur(30px);
+        opacity: 0.75;
+        animation: auroraDrift 28s ease-in-out infinite alternate;
+      }
+
+      body::after {
+        z-index: 2;
+        opacity: 0;
+        background: radial-gradient(
+          390px circle at var(--pointer-x) var(--pointer-y),
+          rgba(135, 174, 202, 0.065) 0%,
+          rgba(109, 151, 181, 0.035) 34%,
+          rgba(91, 128, 155, 0.012) 58%,
+          transparent 76%
+        );
+        mix-blend-mode: screen;
+        transition: opacity 0.8s ease;
+      }
+
+      .hourglass-particles {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+        opacity: 0.84;
+        pointer-events: none;
+      }
+
+      .pointer-active body::after {
+        opacity: 1;
+      }
+
+      @keyframes auroraDrift {
+        0% {
+          transform: translate3d(-1.5%, -1%, 0) rotate(-2deg) scale(1);
+          background-position: 0% 50%;
+        }
+
+        50% {
+          transform: translate3d(1%, 1.5%, 0) rotate(1deg) scale(1.05);
+          background-position: 60% 35%;
+        }
+
+        100% {
+          transform: translate3d(1.5%, -1%, 0) rotate(3deg) scale(1.02);
+          background-position: 100% 65%;
+        }
+      }
+
+      .container {
+        max-width: 1440px;
+      }
+
+      /* =====================================================
+         02. 共用卡片樣式
+      ===================================================== */
+      .box01 {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(210, 221, 232, 0.12);
+        border-radius: 15px;
+        box-shadow:
+          0 10px 24px rgba(0, 0, 0, 0.22),
+          0 1px 3px rgba(0, 0, 0, 0.18);
+        transition:
+          transform 0.4s ease,
+          box-shadow 0.4s ease,
+          filter 0.4s ease,
+          border-color 0.4s ease;
+      }
+
+      .box01:hover {
+        transform: translateY(-5px);
+        filter: brightness(1.03);
+        box-shadow:
+          0 18px 36px rgba(0, 0, 0, 0.38),
+          0 0 0 1px rgba(220, 232, 243, 0.14);
+        border-color: rgba(220, 232, 243, 0.42);
+      }
+
+      /* =====================================================
+         03. Header 品牌主視覺
+      ===================================================== */
+      .brand-banner {
+        min-height: 285px;
+        padding: 35px 5%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 25px;
+        color: var(--color-white);
+        background:
+          radial-gradient(
+            circle at 78% 45%,
+            rgba(181, 198, 216, 0.17),
+            transparent 30%
+          ),
+          linear-gradient(125deg, #0b0d11, #1d252e 60%, #10151b);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .brand-banner::before {
+        content: "";
+        position: absolute;
+        inset: 10px;
+        border: 1px solid rgba(214, 226, 237, 0.15);
+        border-radius: 10px;
+        pointer-events: none;
+      }
+
+      .brand-banner::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -45%;
+        width: 38%;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(228, 239, 249, 0.72),
+          transparent
+        );
+        box-shadow: 0 0 12px rgba(191, 220, 241, 0.42);
+        animation: bannerGlint 11s ease-in-out infinite;
+        pointer-events: none;
+      }
+
+      @keyframes bannerGlint {
+        0%,
+        18% {
+          left: -45%;
+          opacity: 0;
+        }
+
+        35% {
+          opacity: 0.8;
+        }
+
+        70%,
+        100% {
+          left: 110%;
+          opacity: 0;
+        }
+      }
+
+      .brand-copy {
+        position: relative;
+        z-index: 2;
+        max-width: 650px;
+      }
+
+      .brand-overline {
+        display: block;
+        margin-bottom: 15px;
+        color: #b9c4cf;
+        font-size: 12px;
+        letter-spacing: 5px;
+      }
+
+      .brand-title {
+        margin: 0;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(35px, 5vw, 65px);
+        font-weight: 500;
+        letter-spacing: 5px;
+        line-height: 1.1;
+        color: #f7f9fb;
+        background: linear-gradient(
+          105deg,
+          #ffffff 12%,
+          #b9c9d8 38%,
+          #ffffff 52%,
+          #d0dbe5 70%,
+          #ffffff 88%
+        );
+        background-size: 220% 100%;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation:
+          titleSheen 12s ease-in-out infinite,
+          lumeBreath 4.8s ease-in-out infinite;
+      }
+
+      @keyframes titleSheen {
+        0%,
+        100% {
+          background-position: 0% 50%;
+        }
+
+        50% {
+          background-position: 100% 50%;
+        }
+      }
+
+      @keyframes lumeBreath {
+        0%,
+        100% {
+          filter:
+            drop-shadow(0 0 2px rgba(158, 224, 153, 0.2))
+            drop-shadow(0 0 8px rgba(104, 190, 105, 0.12));
+        }
+
+        50% {
+          filter:
+            drop-shadow(0 0 4px rgba(199, 255, 176, 0.58))
+            drop-shadow(0 0 18px rgba(104, 222, 113, 0.32));
+        }
+      }
+
+      .brand-chinese {
+        margin: 15px 0 10px;
+        color: #e0e5eb;
+        font-size: 18px;
+        letter-spacing: 8px;
+        text-shadow: 0 0 24px rgba(198, 219, 236, 0.22);
+      }
+
+      .brand-description {
+        margin: 0;
+        color: #aeb8c2;
+        font-size: 13px;
+        letter-spacing: 2px;
+      }
+
+      .brand-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 22px;
+        margin-top: 25px;
+      }
+
+      .brand-nav a {
+        position: relative;
+        color: #dce2e8;
+        font-size: 13px;
+        letter-spacing: 2px;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .brand-nav a::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        bottom: -6px;
+        left: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, #dce8f2, transparent);
+        transform: scaleX(0);
+        transform-origin: center;
+        transition: transform 0.35s ease;
+      }
+
+      .brand-nav a:hover {
+        color: #ffffff;
+      }
+
+      .brand-nav a:hover::after,
+      .brand-nav a:focus-visible::after {
+        transform: scaleX(1);
+      }
+
+      /* =====================================================
+         04. LOGO 3D 柔性雕塑與微氣壓呼吸
+      ===================================================== */
+      .brand-sculpture {
+        position: relative;
+        z-index: 1;
+        width: 290px;
+        min-width: 220px;
+        height: 230px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        perspective: 900px;
+        background:
+          radial-gradient(
+            ellipse at 50% 75%,
+            rgba(193, 216, 234, 0.2),
+            transparent 60%
+          );
+      }
+
+      .brand-sculpture::before {
+        content: "";
+        position: absolute;
+        width: 76%;
+        height: 70%;
+        border-radius: 50%;
+        background:
+          radial-gradient(ellipse at 28% 22%, rgba(255, 255, 255, 0.72), transparent 12%),
+          radial-gradient(ellipse at 38% 30%, rgba(235, 246, 255, 0.68), transparent 24%),
+          radial-gradient(ellipse at 50% 48%, #74899d 0%, #303b48 35%, #151b22 68%, #090c10 82%);
+        box-shadow:
+          inset 10px 12px 18px rgba(255, 255, 255, 0.28),
+          inset -18px -20px 30px rgba(0, 0, 0, 0.82),
+          inset 0 0 0 2px rgba(224, 237, 249, 0.12),
+          0 0 34px rgba(174, 202, 224, 0.2),
+          0 28px 34px rgba(0, 0, 0, 0.42);
+        filter: blur(0.2px);
+        animation: sculptureBreath 7s ease-in-out infinite;
+      }
+
+      .brand-sculpture::after {
+        content: "";
+        position: absolute;
+        inset: 20% 12%;
+        border-radius: 50%;
+        background: linear-gradient(
+          112deg,
+          transparent 25%,
+          rgba(255, 255, 255, 0.03) 42%,
+          rgba(255, 255, 255, 0.32) 49%,
+          rgba(228, 241, 252, 0.05) 55%,
+          transparent 72%
+        );
+        opacity: 0.78;
+        transform: rotate(-17deg);
+        transition: transform 0.6s ease, opacity 0.6s ease;
+        pointer-events: none;
+      }
+
+      .brand-sculpture img {
+        position: relative;
+        z-index: 2;
+        width: 90%;
+        max-height: 220px;
+        object-fit: contain;
+        transform: perspective(900px) rotateY(-16deg) rotateX(6deg);
+        filter:
+          drop-shadow(0 1px 0 rgba(255, 255, 255, 0.62))
+          drop-shadow(0 4px 1px rgba(184, 199, 212, 0.38))
+          drop-shadow(0 9px 5px rgba(0, 0, 0, 0.66))
+          drop-shadow(0 18px 17px rgba(0, 0, 0, 0.58))
+          contrast(1.08)
+          brightness(1.08);
+        animation: sculptureFloat 7s ease-in-out infinite;
+      }
+
+      @keyframes sculptureFloat {
+        0%,
+        100% {
+          transform: perspective(900px) rotateY(-16deg) rotateX(6deg)
+            scale(1);
+        }
+
+        50% {
+          transform: perspective(900px) rotateY(-12deg) rotateX(4deg)
+            scale(1.025);
+        }
+      }
+
+      @keyframes sculptureBreath {
+        0%,
+        100% {
+          transform: scale(0.98);
+        }
+
+        50% {
+          transform: scale(1.035);
+        }
+      }
+
+      @keyframes sculpturePress {
+        0%,
+        100% {
+          transform: perspective(900px) rotateY(-16deg) rotateX(6deg) scale(1);
+        }
+
+        28% {
+          transform: perspective(900px) rotateY(-12deg) rotateX(3deg)
+            scale(0.96, 0.94);
+        }
+
+        62% {
+          transform: perspective(900px) rotateY(-19deg) rotateX(7deg)
+            scale(1.015, 1.025);
+        }
+      }
+
+      .brand-sculpture:hover::after {
+        opacity: 1;
+        transform: rotate(-8deg) translateX(5px);
+      }
+
+      .brand-sculpture:hover img {
+        animation: sculpturePress 0.65s cubic-bezier(0.2, 0.8, 0.25, 1);
+      }
+
+      /* =====================================================
+         05. Banner 下方：Bootstrap 自動輪播
+      ===================================================== */
+      .showcase-carousel {
+        overflow: hidden;
+        border-radius: 16px;
+        background: var(--color-deep);
+        box-shadow: 0 18px 36px rgba(0, 0, 0, 0.36);
+      }
+
+      .showcase-carousel .carousel-item {
+        transition: opacity 0.8s ease-in-out;
+      }
+
+      .showcase-carousel .carousel-item {
+        position: relative;
+      }
+
+      .showcase-carousel .carousel-item img {
+        width: 100%;
+        height: clamp(250px, 35vw, 430px);
+        object-fit: cover;
+        object-position: center;
+        filter: saturate(0.72) contrast(1.08) brightness(0.72);
+      }
+
+      .showcase-carousel .carousel-item::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          90deg,
+          rgba(8, 11, 15, 0.78),
+          rgba(8, 11, 15, 0.08) 75%
+        );
+      }
+
+      .showcase-carousel .carousel-caption {
+        z-index: 2;
+        right: auto;
+        bottom: 18%;
+        left: 9%;
+        max-width: 430px;
+        text-align: left;
+      }
+
+      .carousel-caption small {
+        color: #d2deea;
+        font-size: 11px;
+        letter-spacing: 5px;
+      }
+
+      .carousel-caption h2 {
+        margin: 12px 0;
+        color: #ffffff;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(28px, 4vw, 48px);
+        font-weight: 400;
+        letter-spacing: 2px;
+      }
+
+      .showcase-carousel .carousel-item.active .carousel-caption h2 {
+        animation: captionReveal 1.15s ease both;
+      }
+
+      @keyframes captionReveal {
+        from {
+          opacity: 0;
+          letter-spacing: -1px;
+          transform: translateY(10px);
+        }
+
+        to {
+          opacity: 1;
+          letter-spacing: 3px;
+          transform: translateY(0);
+        }
+      }
+
+      .carousel-caption p {
+        color: #d4dee7;
+        font-size: 13px;
+        letter-spacing: 2px;
+      }
+
+      .showcase-carousel .carousel-indicators {
+        z-index: 3;
+      }
+
+      .showcase-carousel .carousel-control-prev,
+      .showcase-carousel .carousel-control-next {
+        z-index: 3;
+        width: 8%;
+      }
+
+      /* =====================================================
+         06. 商品卡片：第一組原始欄位
+      ===================================================== */
+      .watch-card {
+        height: 100%;
+        min-height: 420px;
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+        background: linear-gradient(145deg, #1c222a, #11151a 72%);
+        border-color: rgba(220, 232, 243, 0.08);
+        transform-style: preserve-3d;
+        transition:
+          transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1),
+          box-shadow 0.45s ease,
+          border-color 0.45s ease;
+      }
+
+      .watch-card:hover {
+        transform: perspective(900px) translateY(-5px) rotateX(0.8deg)
+          rotateY(-0.7deg);
+        border-color: rgba(220, 232, 243, 0.58);
+        box-shadow:
+          0 22px 40px rgba(0, 0, 0, 0.46),
+          0 0 18px rgba(180, 203, 222, 0.08);
+      }
+
+      .watch-photo-wrap {
+        position: relative;
+        height: 205px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        border-radius: 11px;
+        background:
+          radial-gradient(circle at 18% 22%, rgba(225, 236, 246, 0.14) 0 1px, transparent 3px),
+          radial-gradient(circle at 76% 32%, rgba(225, 236, 246, 0.1) 0 2px, transparent 5px),
+          radial-gradient(circle at 62% 78%, rgba(225, 236, 246, 0.08) 0 1px, transparent 4px),
+          radial-gradient(ellipse at 50% 45%, #303943 0%, #1b222a 55%, #11151a 100%);
+      }
+
+      .watch-photo-wrap::before {
+        content: "";
+        position: absolute;
+        z-index: 2;
+        inset: -40% -55%;
+        background: linear-gradient(
+          110deg,
+          transparent 42%,
+          rgba(255, 255, 255, 0.04) 46%,
+          rgba(240, 248, 255, 0.54) 50%,
+          rgba(255, 255, 255, 0.08) 54%,
+          transparent 58%
+        );
+        transform: translateX(-75%) skewX(-12deg);
+        transition: transform 0.6s cubic-bezier(0.2, 0.65, 0.25, 1);
+        pointer-events: none;
+      }
+
+      .watch-photo-wrap::after {
+        content: "";
+        position: absolute;
+        z-index: 0;
+        inset: 0;
+        background: radial-gradient(ellipse at 50% 48%, transparent 35%, rgba(0, 0, 0, 0.24));
+        pointer-events: none;
+      }
+
+      .watch-card:hover .watch-photo-wrap::before {
+        transform: translateX(75%) skewX(-12deg);
+      }
+
+      .watch-photo-wrap img {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        padding: 10px;
+        object-fit: contain;
+        filter: saturate(0.82) contrast(1.06);
+        transition: transform 0.5s ease, filter 0.5s ease;
+      }
+
+      .watch-card:hover .watch-photo-wrap img {
+        transform: scale(1.07);
+        filter: saturate(0.96) contrast(1.08);
+      }
+
+      .watch-tag {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        padding: 5px 10px;
+        color: #ffffff;
+        font-size: 10px;
+        letter-spacing: 2px;
+        border-radius: 3px;
+        background: rgba(25, 38, 50, 0.94);
+        border: 1px solid rgba(151, 180, 203, 0.2);
+        z-index: 3;
+      }
+
+      .watch-content {
+        flex: 1;
+        padding: 17px 5px 5px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .watch-series {
+        color: #aab5c0;
+        font-size: 10px;
+        letter-spacing: 2px;
+      }
+
+      .watch-name {
+        margin: 8px 0;
+        color: #eef2f6;
+        font-family: Georgia, "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+        font-size: 17px;
+        font-weight: 500;
+        letter-spacing: 2px;
+        transition: color 0.35s ease, letter-spacing 0.35s ease;
+      }
+
+      .watch-card:hover .watch-name {
+        color: #ffffff;
+        letter-spacing: 2.6px;
+      }
+
+      .watch-description {
+        min-height: 42px;
+        margin-bottom: 12px;
+        color: #a5afb9;
+        font-size: 11px;
+        line-height: 1.8;
+      }
+
+      .watch-bottom {
+        margin-top: auto;
+        padding-top: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        border-top: 1px solid rgba(210, 221, 232, 0.16);
+      }
+
+      .watch-price {
+        color: #e8edf2;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 15px;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      .watch-link {
+        padding: 7px 10px;
+        color: #ffffff;
+        font-size: 10px;
+        letter-spacing: 1px;
+        white-space: nowrap;
+        text-decoration: none;
+        border-radius: 3px;
+        background: #344756;
+        border: 1px solid rgba(156, 183, 204, 0.16);
+        flex-shrink: 0;
+        transition:
+          background 0.3s ease,
+          border-color 0.3s ease,
+          transform 0.3s ease;
+      }
+
+      .watch-link:hover {
+        color: #ffffff;
+        background: #435b6d;
+        border-color: rgba(177, 201, 220, 0.42);
+        transform: translateY(-1px);
+      }
+
+      /* 第一列最後一張：品牌預約卡 */
+      .editorial-card {
+        min-height: 420px;
+        height: 100%;
+        padding: 25px 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        color: #ffffff;
+        text-align: center;
+        background:
+          radial-gradient(circle at 50% 30%, rgba(103, 143, 171, 0.17), transparent 48%),
+          radial-gradient(circle at 100% 100%, rgba(70, 99, 126, 0.12), transparent 52%),
+          linear-gradient(145deg, #202832, #0d1117);
+      }
+
+      .editorial-card .editorial-number {
+        color: #aebfce;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(25px, 2.8vw, 36px);
+        letter-spacing: 1px;
+        white-space: nowrap;
+      }
+
+      .editorial-card h3 {
+        margin: 20px 0 12px;
+        font-size: 19px;
+        letter-spacing: 3px;
+      }
+
+      .editorial-card p {
+        color: #b7c1cb;
+        font-size: 12px;
+        line-height: 2;
+      }
+
+      .editorial-card a {
+        align-self: center;
+        margin-top: 15px;
+        padding: 9px 20px;
+        color: #ffffff;
+        font-size: 11px;
+        letter-spacing: 2px;
+        text-decoration: none;
+        border: 1px solid rgba(166, 192, 212, 0.48);
+        background: rgba(57, 78, 96, 0.14);
+        transition:
+          color 0.3s ease,
+          background 0.3s ease,
+          border-color 0.3s ease,
+          transform 0.3s ease;
+      }
+
+      .editorial-card a:hover {
+        color: #ffffff;
+        border-color: rgba(206, 225, 239, 0.75);
+        background: rgba(93, 124, 149, 0.5);
+        transform: translateY(-2px);
+      }
+
+      /* =====================================================
+         07. 第二組原始欄位：腕錶系列分類
+      ===================================================== */
+      .collection-card {
+        min-height: 180px;
+        height: 100%;
+        padding: 22px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        color: #e3e8ed;
+        background:
+          radial-gradient(ellipse at 100% 0%, rgba(88, 123, 149, 0.15), transparent 48%),
+          linear-gradient(145deg, #202832, #11151a 76%);
+        transition: background 0.4s ease, border-color 0.4s ease;
+      }
+
+      .collection-card:hover {
+        background:
+          radial-gradient(ellipse at 100% 0%, rgba(99, 143, 174, 0.2), transparent 52%),
+          linear-gradient(145deg, #242f3a, #11151a 76%);
+      }
+
+      .collection-number {
+        color: #9aafbf;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 35px;
+      }
+
+      .collection-en {
+        color: #a7b5c1;
+        font-size: 10px;
+        letter-spacing: 3px;
+      }
+
+      .collection-card h3 {
+        margin: 8px 0 5px;
+        font-size: 17px;
+        font-weight: 700;
+        letter-spacing: 3px;
+      }
+
+      .collection-card p {
+        margin: 0;
+        color: #a5afb9;
+        font-size: 11px;
+      }
+
+      /* =====================================================
+         08. 第三組原始欄位：品牌服務
+      ===================================================== */
+      .service-card {
+        min-height: 160px;
+        height: 100%;
+        padding: 20px;
+        background:
+          radial-gradient(ellipse at 100% 0%, rgba(82, 117, 145, 0.13), transparent 48%),
+          linear-gradient(145deg, #202832, #11151a 78%);
+      }
+
+      .service-number {
+        display: block;
+        margin-bottom: 12px;
+        color: #9aafbf;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 30px;
+      }
+
+      .service-card h3 {
+        margin-bottom: 8px;
+        color: #e3e8ed;
+        font-size: 15px;
+        font-weight: 700;
+        letter-spacing: 2px;
+      }
+
+      .service-card p {
+        margin: 0;
+        color: #a5afb9;
+        font-size: 11px;
+        line-height: 1.8;
+      }
+
+      /* =====================================================
+         09. Footer
+      ===================================================== */
+      .site-footer {
+        min-height: 165px;
+        padding: 30px 5%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 25px;
+        color: #dce5ed;
+        background: linear-gradient(120deg, #0b0d11, #202a35);
+      }
+
+      .footer-title {
+        margin-bottom: 10px;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 24px;
+        letter-spacing: 3px;
+        color: #e8eef3;
+      }
+
+      .footer-info {
+        color: #aebdca;
+        font-size: 11px;
+        line-height: 2;
+        letter-spacing: 1px;
+      }
+
+      .footer-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px;
+      }
+
+      .footer-links a {
+        color: #cbd7e1;
+        font-size: 11px;
+        text-decoration: none;
+        transition: color 0.25s ease;
+      }
+
+      .footer-links a:hover {
+        color: #a9c2d5;
+      }
+
+      .brand-nav a:focus-visible,
+      .watch-link:focus-visible,
+      .editorial-card a:focus-visible,
+      .footer-links a:focus-visible {
+        outline: 1px solid #9bb9d0;
+        outline-offset: 4px;
+      }
+
+      /* 商品詳情彈窗 */
+      .watch-detail-modal .modal-dialog {
+        max-width: 860px;
+      }
+
+      .watch-detail-modal .modal-content {
+        overflow: hidden;
+        color: #e9eef3;
+        border: 1px solid rgba(182, 207, 226, 0.25);
+        border-radius: 16px;
+        background:
+          radial-gradient(ellipse at 0% 0%, rgba(86, 126, 155, 0.2), transparent 46%),
+          linear-gradient(145deg, #1a222b, #0d1117 72%);
+        box-shadow:
+          0 30px 90px rgba(0, 0, 0, 0.6),
+          0 0 34px rgba(108, 157, 191, 0.1);
+      }
+
+      .watch-detail-modal .modal-header {
+        padding: 22px 26px 12px;
+        border: 0;
+      }
+
+      .watch-detail-kicker {
+        display: block;
+        margin-bottom: 8px;
+        color: #9eb4c5;
+        font-size: 10px;
+        letter-spacing: 3px;
+      }
+
+      .watch-detail-modal .modal-title {
+        color: #f3f6f9;
+        font-family: Georgia, "Noto Sans TC", "Microsoft JhengHei", serif;
+        font-size: clamp(20px, 3vw, 28px);
+        letter-spacing: 2px;
+      }
+
+      .watch-detail-modal .btn-close {
+        filter: invert(1) grayscale(1);
+        opacity: 0.72;
+      }
+
+      .watch-detail-modal .btn-close:hover {
+        opacity: 1;
+      }
+
+      .watch-detail-modal .modal-body {
+        padding: 12px 26px 26px;
+      }
+
+      .watch-detail-image-wrap {
+        min-height: 275px;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        border: 1px solid rgba(196, 216, 232, 0.14);
+        border-radius: 12px;
+        background:
+          radial-gradient(circle at 50% 46%, rgba(156, 184, 205, 0.13), transparent 53%),
+          linear-gradient(145deg, #222c36, #11161c);
+      }
+
+      .watch-detail-image-wrap img {
+        display: block;
+        width: 100%;
+        max-height: 340px;
+        object-fit: contain;
+        padding: 18px;
+        filter: saturate(0.88) contrast(1.05);
+      }
+
+      .watch-detail-series {
+        color: #9eb4c5;
+        font-size: 10px;
+        letter-spacing: 2px;
+      }
+
+      .watch-detail-price {
+        display: block;
+        margin: 14px 0;
+        color: #f2f6fa;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 26px;
+        letter-spacing: 1px;
+      }
+
+      .watch-detail-description {
+        margin-bottom: 20px;
+        color: #b6c0c9;
+        font-size: 13px;
+        line-height: 1.9;
+      }
+
+      .watch-detail-service {
+        margin: 0 0 20px;
+        padding: 14px 16px;
+        color: #b8c5cf;
+        border-left: 2px solid rgba(145, 184, 211, 0.7);
+        background: rgba(123, 159, 184, 0.08);
+        font-size: 11px;
+        line-height: 1.9;
+      }
+
+      .watch-detail-service strong {
+        display: block;
+        margin-bottom: 3px;
+        color: #e4edf4;
+        font-size: 12px;
+        letter-spacing: 1px;
+      }
+
+      .watch-detail-actions {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .watch-detail-actions .btn {
+        min-height: 42px;
+        padding: 10px 16px;
+        border-radius: 4px;
+        font-size: 11px;
+        letter-spacing: 1px;
+      }
+
+      .watch-detail-call {
+        color: #e3edf4;
+        border: 1px solid rgba(166, 194, 214, 0.35);
+        background: rgba(78, 105, 127, 0.2);
+      }
+
+      .watch-detail-call:hover {
+        color: #ffffff;
+        border-color: rgba(191, 217, 235, 0.62);
+        background: rgba(91, 126, 152, 0.36);
+      }
+
+      .watch-detail-booking {
+        color: #10151a;
+        border: 1px solid #dce8f1;
+        background: #dce8f1;
+      }
+
+      .watch-detail-booking:hover {
+        color: #0c1116;
+        border-color: #ffffff;
+        background: #ffffff;
+      }
+
+      .watch-detail-note {
+        margin: 15px 0 0;
+        color: #8997a3;
+        font-size: 10px;
+        line-height: 1.7;
+      }
+
+      .watch-detail-actions .btn:focus-visible,
+      .watch-detail-modal .btn-close:focus-visible {
+        outline: 2px solid #a9c7de;
+        outline-offset: 3px;
+        box-shadow: none;
+      }
+
+      /* =====================================================
+         10. RWD 響應式調整
+      ===================================================== */
+      @media (max-width: 767px) {
+        .brand-banner {
+          min-height: auto;
+          padding: 35px 25px;
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .brand-sculpture {
+          width: 220px;
+          min-width: 0;
+          height: 180px;
+        }
+
+        .brand-sculpture img {
+          max-height: 175px;
+        }
+
+        .brand-nav {
+          justify-content: center;
+          gap: 15px;
+        }
+
+        .showcase-carousel .carousel-item img {
+          height: 260px;
+        }
+
+        .showcase-carousel .carousel-caption {
+          bottom: 12%;
+          left: 10%;
+          max-width: 75%;
+        }
+
+        .carousel-caption p {
+          font-size: 11px;
+        }
+
+        .site-footer {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .watch-detail-modal .modal-header {
+          padding: 20px 20px 10px;
+        }
+
+        .watch-detail-modal .modal-body {
+          padding: 10px 20px 22px;
+        }
+
+        .watch-detail-image-wrap {
+          min-height: 210px;
+        }
+      }
+
+      @media (hover: none), (prefers-reduced-motion: reduce) {
+        body::after {
+          display: none;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          animation-duration: 0.01ms !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+
+      <!-- ===================================================
+           Header：保留原本欄位與顯示斷點
+           d-md-none d-lg-block
+      ==================================================== -->
+      <div class="row">
+        <div class="col-12 mt-3 d-md-none d-lg-block">
+          <header class="box01 brand-banner">
+
+            <div class="brand-copy">
+              <span class="brand-overline">
+                SEIKO · PREMIUM WATCH COLLECTION
+              </span>
+
+              <h1 class="brand-title">SEIKO</h1>
+
+              <h2 class="brand-chinese">時序典藏</h2>
+
+              <p class="brand-description">
+                經典工藝・精準時計・永恆風格
+              </p>
+
+              <nav class="brand-nav">
+                <a href="#featured">精選腕錶</a>
+                <a href="#collections">腕錶系列</a>
+                <a href="#contact">鑑賞服務</a>
+              </nav>
+            </div>
+
+            <!-- 3D LOGO 主視覺 -->
+            <div class="brand-sculpture">
+              <img
+                src="image/logo01.png"
+                alt="SEIKO 品牌 LOGO 立體主視覺"
+              />
+            </div>
+
+          </header>
+        </div>
+      </div>
+
+      <!-- ===================================================
+           新增區塊：Banner 下方自動輪播
+           使用指定的 seiko01 ~ seiko05
+      ==================================================== -->
+      <div class="row">
+        <div class="col-12 mt-4">
+
+          <section class="showcase-carousel" aria-label="腕錶形象輪播">
+            <div
+              id="watchCarousel"
+              class="carousel slide carousel-fade"
+              data-bs-ride="carousel"
+              data-bs-interval="4000"
+              data-bs-pause="false"
+            >
+
+              <!-- 輪播指示器 -->
+              <div class="carousel-indicators">
+                <button
+                  type="button"
+                  data-bs-target="#watchCarousel"
+                  data-bs-slide-to="0"
+                  class="active"
+                  aria-current="true"
+                  aria-label="第 1 張"
+                ></button>
+
+                <button
+                  type="button"
+                  data-bs-target="#watchCarousel"
+                  data-bs-slide-to="1"
+                  aria-label="第 2 張"
+                ></button>
+
+                <button
+                  type="button"
+                  data-bs-target="#watchCarousel"
+                  data-bs-slide-to="2"
+                  aria-label="第 3 張"
+                ></button>
+
+                <button
+                  type="button"
+                  data-bs-target="#watchCarousel"
+                  data-bs-slide-to="3"
+                  aria-label="第 4 張"
+                ></button>
+
+                <button
+                  type="button"
+                  data-bs-target="#watchCarousel"
+                  data-bs-slide-to="4"
+                  aria-label="第 5 張"
+                ></button>
+              </div>
+
+              <!-- 輪播照片 -->
+              <div class="carousel-inner">
+
+                <div class="carousel-item active">
+                  <img
+                    src="image/seiko01.jpg"
+                    class="d-block w-100"
+                    alt="SEIKO 精選腕錶 01"
+                  />
+
+                  <div class="carousel-caption">
+                    <small>TIMELESS CRAFTSMANSHIP</small>
+                    <h2>Classic Collection</h2>
+                    <p>讓每一刻，都成為值得珍藏的時光。</p>
+                  </div>
+                </div>
+
+                <div class="carousel-item">
+                  <img
+                    src="image/seiko02.jpg"
+                    class="d-block w-100"
+                    alt="SEIKO 精選腕錶 02"
+                  />
+
+                  <div class="carousel-caption">
+                    <small>PRECISION & ELEGANCE</small>
+                    <h2>Precision Design</h2>
+                    <p>以精準工藝，演繹時間的質感。</p>
+                  </div>
+                </div>
+
+                <div class="carousel-item">
+                  <img
+                    src="image/seiko03.jpg"
+                    class="d-block w-100"
+                    alt="SEIKO 精選腕錶 03"
+                  />
+
+                  <div class="carousel-caption">
+                    <small>THE ART OF WATCHMAKING</small>
+                    <h2>Art Of Time</h2>
+                    <p>細節之中，展現經典腕錶的魅力。</p>
+                  </div>
+                </div>
+
+                <div class="carousel-item">
+                  <img
+                    src="image/seiko04.jpg"
+                    class="d-block w-100"
+                    alt="SEIKO 精選腕錶 04"
+                  />
+
+                  <div class="carousel-caption">
+                    <small>INSPIRED BY HERITAGE</small>
+                    <h2>Heritage Collection</h2>
+                    <p>傳承經典設計，記錄每一段旅程。</p>
+                  </div>
+                </div>
+
+                <div class="carousel-item">
+                  <img
+                    src="image/seiko05.jpg"
+                    class="d-block w-100"
+                    alt="SEIKO 精選腕錶 05"
+                  />
+
+                  <div class="carousel-caption">
+                    <small>YOUR TIME YOUR STYLE</small>
+                    <h2>Discover Your Style</h2>
+                    <p>尋找專屬於你的時間風格。</p>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- 左右切換 -->
+              <button
+                class="carousel-control-prev"
+                type="button"
+                data-bs-target="#watchCarousel"
+                data-bs-slide="prev"
+                aria-label="上一張"
+              >
+                <span
+                  class="carousel-control-prev-icon"
+                  aria-hidden="true"
+                ></span>
+              </button>
+
+              <button
+                class="carousel-control-next"
+                type="button"
+                data-bs-target="#watchCarousel"
+                data-bs-slide="next"
+                aria-label="下一張"
+              >
+                <span
+                  class="carousel-control-next-icon"
+                  aria-hidden="true"
+                ></span>
+              </button>
+
+            </div>
+          </section>
+
+        </div>
+      </div>
+
+      <!-- ===================================================
+           第一組 Row：精選腕錶商品
+           保留原本 col-sm-6 col-lg-4 col-xxl-2
+      ==================================================== -->
+      <div class="row" id="featured">
+
+        <!-- 商品 01 -->
+        <div class="col-sm-6 col-lg-4 col-xxl-2 mt-3">
+          <article class="box01 watch-card">
+            <div class="watch-photo-wrap">
+              <img
+                src="image/seiko01.jpg"
+                alt="SEIKO 經典腕錶 01"
+                loading="lazy"
+              />
+              <span class="watch-tag">FEATURED</span>
+            </div>
+
+            <div class="watch-content">
+              <span class="watch-series">SEIKO / COLLECTION 01</span>
+              <h3 class="watch-name">經典工藝腕錶</h3>
+              <p class="watch-description">
+                以俐落線條與細緻質感，呈現經典時計魅力。
+              </p>
+
+              <div class="watch-bottom">
+                <span class="watch-price">NT$ 18,800</span>
+                <a
+                  class="watch-link"
+                  href="#watchDetailModal"
+                  data-bs-toggle="modal"
+                  aria-haspopup="dialog"
+                  aria-controls="watchDetailModal"
+                >鑑賞商品</a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- 商品 02 -->
+        <div class="col-sm-6 col-lg-4 col-xxl-2 mt-3">
+          <article class="box01 watch-card">
+            <div class="watch-photo-wrap">
+              <img
+                src="image/seiko02.jpg"
+                alt="SEIKO 經典腕錶 02"
+                loading="lazy"
+              />
+              <span class="watch-tag">SELECTED</span>
+            </div>
+
+            <div class="watch-content">
+              <span class="watch-series">SEIKO / COLLECTION 02</span>
+              <h3 class="watch-name">優雅紳士腕錶</h3>
+              <p class="watch-description">
+                沉穩色調搭配精緻錶面，適合日常與正式場合。
+              </p>
+
+              <div class="watch-bottom">
+                <span class="watch-price">NT$ 22,800</span>
+                <a
+                  class="watch-link"
+                  href="#watchDetailModal"
+                  data-bs-toggle="modal"
+                  aria-haspopup="dialog"
+                  aria-controls="watchDetailModal"
+                >鑑賞商品</a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- 商品 03 -->
+        <div class="col-sm-6 col-lg-4 col-xxl-2 mt-3">
+          <article class="box01 watch-card">
+            <div class="watch-photo-wrap">
+              <img
+                src="image/seiko03.jpg"
+                alt="SEIKO 經典腕錶 03"
+                loading="lazy"
+              />
+              <span class="watch-tag">PREMIUM</span>
+            </div>
+
+            <div class="watch-content">
+              <span class="watch-series">SEIKO / COLLECTION 03</span>
+              <h3 class="watch-name">精工機械腕錶</h3>
+              <p class="watch-description">
+                融合時計工藝與細節設計，展現機械美學。
+              </p>
+
+              <div class="watch-bottom">
+                <span class="watch-price">NT$ 26,800</span>
+                <a
+                  class="watch-link"
+                  href="#watchDetailModal"
+                  data-bs-toggle="modal"
+                  aria-haspopup="dialog"
+                  aria-controls="watchDetailModal"
+                >鑑賞商品</a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- 商品 04 -->
+        <div class="col-sm-6 col-lg-4 col-xxl-2 mt-3">
+          <article class="box01 watch-card">
+            <div class="watch-photo-wrap">
+              <img
+                src="image/seiko04.jpg"
+                alt="SEIKO 經典腕錶 04"
+                loading="lazy"
+              />
+              <span class="watch-tag">COLLECTION</span>
+            </div>
+
+            <div class="watch-content">
+              <span class="watch-series">SEIKO / COLLECTION 04</span>
+              <h3 class="watch-name">運動風格腕錶</h3>
+              <p class="watch-description">
+                具備鮮明個性與實用設計，展現自信風格。
+              </p>
+
+              <div class="watch-bottom">
+                <span class="watch-price">NT$ 19,800</span>
+                <a
+                  class="watch-link"
+                  href="#watchDetailModal"
+                  data-bs-toggle="modal"
+                  aria-haspopup="dialog"
+                  aria-controls="watchDetailModal"
+                >鑑賞商品</a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- 商品 05 -->
+        <div class="col-sm-6 col-lg-4 col-xxl-2 mt-3">
+          <article class="box01 watch-card">
+            <div class="watch-photo-wrap">
+              <img
+                src="image/seiko05.jpg"
+                alt="SEIKO 經典腕錶 05"
+                loading="lazy"
+              />
+              <span class="watch-tag">LIMITED</span>
+            </div>
+
+            <div class="watch-content">
+              <span class="watch-series">SEIKO / COLLECTION 05</span>
+              <h3 class="watch-name">珍藏限量腕錶</h3>
+              <p class="watch-description">
+                以獨特設計細節，為收藏增添不同層次。
+              </p>
+
+              <div class="watch-bottom">
+                <span class="watch-price">NT$ 32,800</span>
+                <a
+                  class="watch-link"
+                  href="#watchDetailModal"
+                  data-bs-toggle="modal"
+                  aria-haspopup="dialog"
+                  aria-controls="watchDetailModal"
+                >鑑賞商品</a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- 品牌預約卡：維持第六個欄位 -->
+        <div class="col-sm-6 col-lg-4 col-xxl-2 mt-3">
+          <div class="box01 editorial-card">
+            <span class="editorial-number">SES / 08</span>
+            <h3>尋找你的專屬時計</h3>
+            <p>
+              從經典設計到精工工藝，<br />
+              探索值得珍藏的腕錶作品。
+            </p>
+            <a href="#contact">預約專人鑑賞</a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ===================================================
+           第二組 Row：腕錶系列分類
+           保留原本欄位與 d-none d-xxl-block
+      ==================================================== -->
+      <div class="row" id="collections">
+
+        <div class="col-sm-6 col-lg-3 col-xxl-2 mt-3">
+          <a href="#featured" class="text-decoration-none">
+            <div class="box01 collection-card">
+              <span class="collection-number">01</span>
+              <div>
+                <span class="collection-en">CLASSIC STYLE</span>
+                <h3>經典系列</h3>
+                <p>永不退流行的時計設計</p>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-sm-6 col-lg-3 col-xxl-2 mt-3">
+          <a href="#featured" class="text-decoration-none">
+            <div class="box01 collection-card">
+              <span class="collection-number">02</span>
+              <div>
+                <span class="collection-en">SPORT COLLECTION</span>
+                <h3>運動系列</h3>
+                <p>展現個性與實用機能</p>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-sm-6 col-lg-3 col-xxl-2 mt-3">
+          <a href="#featured" class="text-decoration-none">
+            <div class="box01 collection-card">
+              <span class="collection-number">03</span>
+              <div>
+                <span class="collection-en">DRESS WATCH</span>
+                <h3>正裝系列</h3>
+                <p>細緻優雅的日常品味</p>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-sm-6 col-lg-3 col-xxl-2 mt-3">
+          <a href="#featured" class="text-decoration-none">
+            <div class="box01 collection-card">
+              <span class="collection-number">04</span>
+              <div>
+                <span class="collection-en">MECHANICAL</span>
+                <h3>機械系列</h3>
+                <p>欣賞精密機芯的工藝</p>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-sm-6 col-lg-3 col-xxl-2 mt-3 d-none d-xxl-block">
+          <a href="#featured" class="text-decoration-none">
+            <div class="box01 collection-card">
+              <span class="collection-number">05</span>
+              <div>
+                <span class="collection-en">DIVER COLLECTION</span>
+                <h3>潛水系列</h3>
+                <p>探索不同環境的時計風格</p>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-sm-6 col-lg-3 col-xxl-2 mt-3 d-none d-xxl-block">
+          <a href="#featured" class="text-decoration-none">
+            <div class="box01 collection-card">
+              <span class="collection-number">06</span>
+              <div>
+                <span class="collection-en">LIMITED EDITION</span>
+                <h3>限量典藏</h3>
+                <p>為特別時刻留下紀念</p>
+              </div>
+            </div>
+          </a>
+        </div>
+
+      </div>
+
+      <!-- ===================================================
+           第三組 Row：品牌服務
+           保留原本 col-md-6 col-xl-3
+      ==================================================== -->
+      <div class="row">
+
+        <div class="col-md-6 col-xl-3 mt-3">
+          <div class="box01 service-card">
+            <span class="service-number">01</span>
+            <h3>嚴選腕錶</h3>
+            <p>
+              精選品牌腕錶，重視設計、品質與細節。
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3 mt-3">
+          <div class="box01 service-card">
+            <span class="service-number">02</span>
+            <h3>品質保障</h3>
+            <p>
+              商品資訊透明，提供安心的選購體驗。
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3 mt-3">
+          <div class="box01 service-card">
+            <span class="service-number">03</span>
+            <h3>專人諮詢</h3>
+            <p>
+              依照穿搭風格與需求，協助挑選適合腕錶。
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3 mt-3">
+          <div class="box01 service-card">
+            <span class="service-number">04</span>
+            <h3>售後服務</h3>
+            <p>
+              提供腕錶保養與相關售後諮詢服務。
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3 mt-3">
+          <div class="box01 service-card">
+            <span class="service-number">05</span>
+            <h3>送禮推薦</h3>
+            <p>
+              為生日、紀念日與重要時刻挑選禮物。
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3 mt-3">
+          <div class="box01 service-card">
+            <span class="service-number">06</span>
+            <h3>收藏建議</h3>
+            <p>
+              提供不同風格與系列的腕錶收藏資訊。
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3 mt-3">
+          <div class="box01 service-card">
+            <span class="service-number">07</span>
+            <h3>安全選購</h3>
+            <p>
+              重視購物流程與消費者的購買體驗。
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3 mt-3">
+          <div class="box01 service-card">
+            <span class="service-number">08</span>
+            <h3>預約鑑賞</h3>
+            <p>
+              歡迎預約諮詢，深入了解腕錶特色。
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ===================================================
+           Footer：保留原本顯示斷點 d-none d-md-block
+      ==================================================== -->
+      <div class="row">
+        <div class="col-12 mt-3 d-none d-md-block">
+          <footer class="box01 site-footer" id="contact">
+
+            <div>
+              <h2 class="footer-title">SEIKO 時序典藏</h2>
+              <div class="footer-info">
+                PREMIUM WATCH COLLECTION<br />
+                經典工藝・精準時計・永恆風格
+              </div>
+            </div>
+
+            <div class="footer-info">
+              精品腕錶鑑賞服務<br />
+              歡迎洽詢商品資訊與預約服務
+            </div>
+
+            <nav class="footer-links">
+              <a href="#featured">精選腕錶</a>
+              <a href="#collections">腕錶系列</a>
+              <a href="#contact">聯絡我們</a>
+            </nav>
+
+          </footer>
+        </div>
+      </div>
+
+    </div>
+
+    <div
+      class="modal fade watch-detail-modal"
+      id="watchDetailModal"
+      tabindex="-1"
+      aria-labelledby="watchDetailTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div>
+              <span class="watch-detail-kicker">SEIKO · PRIVATE VIEWING</span>
+              <h2 class="modal-title" id="watchDetailTitle">腕錶商品詳情</h2>
+            </div>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="關閉商品詳情"
+            ></button>
+          </div>
+
+          <div class="modal-body">
+            <div class="row g-4 align-items-center">
+              <div class="col-md-6">
+                <div class="watch-detail-image-wrap">
+                  <img
+                    id="watchDetailImage"
+                    src="image/seiko01.jpg"
+                    alt="SEIKO 商品腕錶"
+                  />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <span class="watch-detail-series" id="watchDetailSeries"></span>
+                <span class="watch-detail-price" id="watchDetailPrice"></span>
+                <p class="watch-detail-description" id="watchDetailDescription"></p>
+
+                <div class="watch-detail-service">
+                  <strong>專人為您安排鑑賞</strong>
+                  預約一對一商品諮詢，了解腕錶特色、佩戴感受與選購細節。
+                </div>
+
+                <div class="watch-detail-actions">
+                  <a
+                    class="btn watch-detail-call"
+                    href="tel:051234567"
+                    aria-label="電話諮詢，05-1234567"
+                  >電話諮詢 05-1234567</a>
+                  <a
+                    class="btn watch-detail-booking"
+                    href="#contact"
+                    data-bs-dismiss="modal"
+                  >預約專人洽詢</a>
+                </div>
+                <p class="watch-detail-note">
+                  商品價格與庫存資訊可能變動，實際內容請以專人確認為準。
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JavaScript：輪播功能需要 -->
+    <script src="JS/bootstrap.bundle.min.js"></script>
+    <script>
+      const particleCanvas = document.createElement("canvas");
+      particleCanvas.className = "hourglass-particles";
+      particleCanvas.setAttribute("aria-hidden", "true");
+      document.body.prepend(particleCanvas);
+
+      const particleContext = particleCanvas.getContext("2d", {
+        alpha: true,
+      });
+
+      if (particleContext) {
+        const prefersReducedMotion = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        );
+        const particleColors = [
+          "rgba(151, 178, 197, 0.26)",
+          "rgba(187, 207, 220, 0.34)",
+          "rgba(218, 228, 235, 0.44)",
+        ];
+        let canvasWidth = 0;
+        let canvasHeight = 0;
+        let pixelRatio = 1;
+        let neckY = 0;
+        let duneHeights = [];
+        let particles = [];
+        let duneTexture = [];
+        let lastFrameTime = 0;
+        let animationFrame = 0;
+
+        const randomBetween = (min, max) => min + Math.random() * (max - min);
+
+        const getDuneSurface = (x) => {
+          const index = Math.max(
+            0,
+            Math.min(duneHeights.length - 1, Math.floor(x / 4)),
+          );
+          return canvasHeight - duneHeights[index];
+        };
+
+        const resetParticle = (particle, stagger = false) => {
+          const upperWidth = canvasWidth * 0.38;
+          const seedY = stagger ? Math.random() * canvasHeight * 0.84 : -12;
+          const progress = Math.min(1, seedY / Math.max(1, neckY));
+          const funnelWidth =
+            seedY < neckY
+              ? upperWidth * (1 - progress) + 10
+              : Math.min(
+                  canvasWidth * 0.34,
+                  10 + (seedY - neckY) * 0.35,
+                );
+          const offset = randomBetween(-funnelWidth, funnelWidth);
+
+          particle.x = canvasWidth * 0.5 + offset;
+          particle.y = seedY;
+          particle.vx = randomBetween(-0.12, 0.12);
+          particle.vy = randomBetween(0.35, 0.9);
+          particle.size = randomBetween(0.45, 1.25);
+          particle.shade = Math.floor(Math.random() * particleColors.length);
+          particle.drift = randomBetween(-0.012, 0.012);
+          particle.spread = randomBetween(0.006, 0.022);
+        };
+
+        const resizeParticleCanvas = () => {
+          const previousWidth = canvasWidth;
+          const previousDune = duneHeights;
+          canvasWidth = window.innerWidth;
+          canvasHeight = window.innerHeight;
+          pixelRatio = Math.min(window.devicePixelRatio || 1, 1.5);
+          neckY = canvasHeight * 0.43;
+
+          particleCanvas.width = Math.round(canvasWidth * pixelRatio);
+          particleCanvas.height = Math.round(canvasHeight * pixelRatio);
+          particleContext.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+
+          const duneSegments = Math.ceil(canvasWidth / 4) + 1;
+          duneHeights = new Array(duneSegments);
+
+          for (let index = 0; index < duneSegments; index += 1) {
+            const x = (index / (duneSegments - 1)) * canvasWidth;
+            const distance = (x - canvasWidth * 0.5) / (canvasWidth * 0.24);
+            const mound = 7 + 48 * Math.exp(-distance * distance);
+            const ripple =
+              2.2 * Math.sin(x * 0.012) +
+              1.2 * Math.sin(x * 0.027 + 1.7);
+            const oldHeight =
+              previousDune.length && previousWidth
+                ? previousDune[
+                    Math.min(
+                      previousDune.length - 1,
+                      Math.floor((x / canvasWidth) * previousWidth / 4),
+                    )
+                  ] || 0
+                : 0;
+
+            duneHeights[index] = Math.max(
+              2,
+              Math.min(canvasHeight * 0.16, Math.max(mound + ripple, oldHeight)),
+            );
+          }
+
+          duneTexture = Array.from({ length: Math.floor(canvasWidth * 0.42) }, () => ({
+            x: Math.random() * canvasWidth,
+            depth: randomBetween(0.08, 0.94),
+            size: randomBetween(0.35, 0.9),
+            alpha: randomBetween(0.08, 0.25),
+          }));
+
+          const particleCount = Math.min(
+            1050,
+            Math.max(360, Math.round((canvasWidth * canvasHeight) / 1450)),
+          );
+          particles = Array.from({ length: particleCount }, () => {
+            const particle = {};
+            resetParticle(particle, true);
+            return particle;
+          });
+        };
+
+        const drawDune = () => {
+          const centerX = canvasWidth * 0.5;
+          const neckWidth = Math.max(10, canvasWidth * 0.012);
+          const chamberWidth = canvasWidth * 0.38;
+
+          const streamGlow = particleContext.createRadialGradient(
+            centerX,
+            neckY,
+            0,
+            centerX,
+            neckY,
+            Math.min(canvasWidth * 0.3, 280),
+          );
+          streamGlow.addColorStop(0, "rgba(142, 175, 197, 0.055)");
+          streamGlow.addColorStop(1, "rgba(142, 175, 197, 0)");
+          particleContext.fillStyle = streamGlow;
+          particleContext.fillRect(0, 0, canvasWidth, canvasHeight);
+
+          particleContext.beginPath();
+          particleContext.moveTo(centerX - chamberWidth, 0);
+          particleContext.bezierCurveTo(
+            centerX - chamberWidth * 0.82,
+            neckY * 0.56,
+            centerX - neckWidth * 2.6,
+            neckY * 0.78,
+            centerX - neckWidth,
+            neckY,
+          );
+          particleContext.bezierCurveTo(
+            centerX - neckWidth * 2.2,
+            neckY * 1.3,
+            centerX - chamberWidth * 0.75,
+            neckY * 1.66,
+            centerX - chamberWidth * 0.9,
+            canvasHeight,
+          );
+          particleContext.moveTo(centerX + chamberWidth, 0);
+          particleContext.bezierCurveTo(
+            centerX + chamberWidth * 0.82,
+            neckY * 0.56,
+            centerX + neckWidth * 2.6,
+            neckY * 0.78,
+            centerX + neckWidth,
+            neckY,
+          );
+          particleContext.bezierCurveTo(
+            centerX + neckWidth * 2.2,
+            neckY * 1.3,
+            centerX + chamberWidth * 0.75,
+            neckY * 1.66,
+            centerX + chamberWidth * 0.9,
+            canvasHeight,
+          );
+          particleContext.strokeStyle = "rgba(155, 184, 204, 0.055)";
+          particleContext.lineWidth = 1;
+          particleContext.stroke();
+
+          particleContext.beginPath();
+          particleContext.moveTo(0, canvasHeight);
+
+          for (let index = 0; index < duneHeights.length; index += 1) {
+            particleContext.lineTo(
+              index * 4,
+              canvasHeight - duneHeights[index],
+            );
+          }
+
+          particleContext.lineTo(canvasWidth, canvasHeight);
+          particleContext.closePath();
+
+          const duneGradient = particleContext.createLinearGradient(
+            0,
+            canvasHeight - 55,
+            0,
+            canvasHeight,
+          );
+          duneGradient.addColorStop(0, "rgba(107, 133, 151, 0.19)");
+          duneGradient.addColorStop(0.32, "rgba(54, 72, 85, 0.22)");
+          duneGradient.addColorStop(1, "rgba(20, 27, 33, 0.58)");
+          particleContext.fillStyle = duneGradient;
+          particleContext.fill();
+
+          particleContext.beginPath();
+          for (let index = 0; index < duneHeights.length; index += 1) {
+            const x = index * 4;
+            const y = canvasHeight - duneHeights[index];
+            if (index === 0) particleContext.moveTo(x, y);
+            else particleContext.lineTo(x, y);
+          }
+          particleContext.strokeStyle = "rgba(164, 190, 207, 0.2)";
+          particleContext.lineWidth = 0.7;
+          particleContext.stroke();
+
+          particleContext.beginPath();
+          duneTexture.forEach((grain) => {
+            const surface = getDuneSurface(grain.x);
+            const duneDepth = canvasHeight - surface;
+            particleContext.moveTo(grain.x + grain.size, surface + grain.depth * duneDepth);
+            particleContext.arc(
+              grain.x,
+              surface + grain.depth * duneDepth,
+              grain.size,
+              0,
+              Math.PI * 2,
+            );
+          });
+          particleContext.fillStyle = "rgba(177, 198, 212, 0.19)";
+          particleContext.fill();
+        };
+
+        const drawStaticScene = () => {
+          particleContext.clearRect(0, 0, canvasWidth, canvasHeight);
+          drawDune();
+          drawParticles(0);
+        };
+
+        const drawParticles = (delta) => {
+          const frameScale = Math.min(delta / 16.67, 1.8);
+          const groupedPaths = particleColors.map(() => []);
+          const centerX = canvasWidth * 0.5;
+
+          particles.forEach((particle) => {
+            if (particle.y < neckY) {
+              const approach = Math.max(
+                0,
+                (particle.y - neckY * 0.56) / (neckY * 0.44),
+              );
+              particle.vx +=
+                (centerX - particle.x) * (0.000035 + approach * 0.00016);
+            } else {
+              const side = particle.x < centerX ? -1 : 1;
+              particle.vx += side * particle.spread;
+            }
+
+            particle.vx += particle.drift * frameScale;
+            particle.vx *= 0.994;
+            particle.vy = Math.min(particle.vy + 0.014 * frameScale, 1.7);
+            particle.x += particle.vx * frameScale;
+            particle.y += particle.vy * frameScale;
+
+            if (particle.y >= neckY && particle.y - particle.vy < neckY) {
+              particle.vx += randomBetween(-0.22, 0.22);
+            }
+
+            if (
+              particle.x < -8 ||
+              particle.x > canvasWidth + 8 ||
+              particle.y >= getDuneSurface(particle.x)
+            ) {
+              if (particle.y >= getDuneSurface(particle.x)) {
+                const index = Math.max(
+                  0,
+                  Math.min(duneHeights.length - 1, Math.floor(particle.x / 4)),
+                );
+                duneHeights[index] = Math.min(
+                  canvasHeight * 0.16,
+                  duneHeights[index] + particle.size * 0.1,
+                );
+              }
+              resetParticle(particle);
+              return;
+            }
+
+            groupedPaths[particle.shade].push(particle);
+          });
+
+          groupedPaths.forEach((group, index) => {
+            particleContext.beginPath();
+            group.forEach((particle) => {
+              particleContext.moveTo(particle.x + particle.size, particle.y);
+              particleContext.arc(
+                particle.x,
+                particle.y,
+                particle.size,
+                0,
+                Math.PI * 2,
+              );
+            });
+            particleContext.fillStyle = particleColors[index];
+            particleContext.fill();
+          });
+        };
+
+        const renderParticles = (time = 0) => {
+          if (prefersReducedMotion.matches) {
+            animationFrame = 0;
+            return;
+          }
+
+          animationFrame = window.requestAnimationFrame(renderParticles);
+          if (time - lastFrameTime < 28) return;
+
+          const delta = lastFrameTime ? time - lastFrameTime : 16.67;
+          lastFrameTime = time;
+          particleContext.clearRect(0, 0, canvasWidth, canvasHeight);
+          drawDune();
+          drawParticles(delta);
+        };
+
+        resizeParticleCanvas();
+        if (!prefersReducedMotion.matches) {
+          animationFrame = window.requestAnimationFrame(renderParticles);
+        } else {
+          drawStaticScene();
+        }
+
+        window.addEventListener("resize", resizeParticleCanvas, {
+          passive: true,
+        });
+        prefersReducedMotion.addEventListener("change", () => {
+          if (prefersReducedMotion.matches && animationFrame) {
+            window.cancelAnimationFrame(animationFrame);
+            animationFrame = 0;
+            drawStaticScene();
+            return;
+          }
+
+          if (!prefersReducedMotion.matches && !animationFrame) {
+            lastFrameTime = 0;
+            animationFrame = window.requestAnimationFrame(renderParticles);
+          }
+        });
+      }
+
+      const watchDetailModal = document.getElementById("watchDetailModal");
+
+      watchDetailModal.addEventListener("show.bs.modal", (event) => {
+        const trigger = event.relatedTarget;
+        const card = trigger?.closest(".watch-card");
+
+        if (!card) {
+          event.preventDefault();
+          return;
+        }
+
+        const productImage = card.querySelector(".watch-photo-wrap img");
+        const productName = card.querySelector(".watch-name");
+        const productSeries = card.querySelector(".watch-series");
+        const productDescription = card.querySelector(".watch-description");
+        const productPrice = card.querySelector(".watch-price");
+        const productTag = card.querySelector(".watch-tag");
+
+        document.getElementById("watchDetailImage").src = productImage.src;
+        document.getElementById("watchDetailImage").alt = productImage.alt;
+        document.getElementById("watchDetailTitle").textContent =
+          productName.textContent.trim();
+        document.getElementById("watchDetailSeries").textContent =
+          `${productSeries.textContent.trim()} · ${productTag.textContent.trim()}`;
+        document.getElementById("watchDetailPrice").textContent =
+          productPrice.textContent.trim();
+        document.getElementById("watchDetailDescription").textContent =
+          productDescription.textContent.trim();
+      });
+
+      const finePointer = window.matchMedia(
+        "(hover: hover) and (pointer: fine)",
+      );
+      const reducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      );
+
+      if (finePointer.matches && !reducedMotion.matches) {
+        const pageRoot = document.documentElement;
+        let pointerFrame = 0;
+        let targetX = 0;
+        let targetY = 0;
+        let currentX = 0;
+        let currentY = 0;
+        let pointerInitialized = false;
+
+        const easePointer = () => {
+          currentX += (targetX - currentX) * 0.12;
+          currentY += (targetY - currentY) * 0.12;
+
+          if (Math.abs(targetX - currentX) < 0.35) currentX = targetX;
+          if (Math.abs(targetY - currentY) < 0.35) currentY = targetY;
+
+          pageRoot.style.setProperty("--pointer-x", `${currentX}px`);
+          pageRoot.style.setProperty("--pointer-y", `${currentY}px`);
+
+          if (currentX !== targetX || currentY !== targetY) {
+            pointerFrame = window.requestAnimationFrame(easePointer);
+          } else {
+            pointerFrame = 0;
+          }
+        };
+
+        document.addEventListener(
+          "pointermove",
+          (event) => {
+            if (event.pointerType !== "mouse") return;
+
+            targetX = event.clientX;
+            targetY = event.clientY;
+
+            if (!pointerInitialized) {
+              currentX = targetX;
+              currentY = targetY;
+              pageRoot.style.setProperty("--pointer-x", `${currentX}px`);
+              pageRoot.style.setProperty("--pointer-y", `${currentY}px`);
+              pointerInitialized = true;
+              pageRoot.classList.add("pointer-active");
+              return;
+            }
+
+            pageRoot.classList.add("pointer-active");
+            if (!pointerFrame) {
+              pointerFrame = window.requestAnimationFrame(easePointer);
+            }
+          },
+          { passive: true },
+        );
+
+        window.addEventListener("blur", () => {
+          pageRoot.classList.remove("pointer-active");
+        });
+
+        window.addEventListener("pointerout", (event) => {
+          if (!event.relatedTarget) {
+            pageRoot.classList.remove("pointer-active");
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
